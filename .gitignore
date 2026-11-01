@@ -1,0 +1,21 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+
+# Secrets
+.env
+
+# Secrets
+.env
+.python-version
+.DS_Store
+.vscode/settings.json
+.gitignore
+uv.lock
