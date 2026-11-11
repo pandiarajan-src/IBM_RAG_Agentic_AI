@@ -59,7 +59,7 @@ Break down each step of your calculation."""
     show(plain, llm_model(plain, max_tokens=20))
 
 
-def exercise_4() -> None:
+def cot_exercise() -> None:
     """Exercise 4: CoT for a decision and for explaining a process."""
     print_header("EXERCISE 4 - Chain-of-thought prompts")
 
@@ -148,7 +148,7 @@ def main() -> None:
 
     chain_of_thought()
     if not args.skip_exercises:
-        exercise_4()
+        cot_exercise()
 
     self_consistency_single_prompt()
     self_consistency_majority_vote(args.samples)
