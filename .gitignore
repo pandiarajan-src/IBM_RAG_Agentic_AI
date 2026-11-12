@@ -19,3 +19,4 @@ wheels/
 .vscode/settings.json
 .gitignore
 uv.lock
+BuildSmarterAIAppsEmpowerLLMwithLangChain/workspace/
