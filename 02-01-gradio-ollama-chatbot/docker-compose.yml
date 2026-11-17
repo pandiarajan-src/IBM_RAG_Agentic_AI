@@ -1,0 +1,20 @@
+# The app runs in a container; Ollama stays on your host machine.
+#   docker compose up --build     then open http://localhost:7860
+services:
+  supportbot:
+    build: .
+    ports:
+      - "7860:7860"
+    environment:
+      # host.docker.internal = "my host machine" as seen from inside the container
+      OLLAMA_HOST: ${OLLAMA_HOST:-http://host.docker.internal:11434}
+      OLLAMA_MODEL: ${OLLAMA_MODEL:-llama3.2}
+      SUPPORTBOT_DB: /app/data/chat_log.db
+    extra_hosts:
+      - "host.docker.internal:host-gateway"   # needed on Linux; harmless on Mac/Windows
+    volumes:
+      - chat_data:/app/data                   # keeps the SQLite log across restarts
+    restart: unless-stopped
+
+volumes:
+  chat_data:

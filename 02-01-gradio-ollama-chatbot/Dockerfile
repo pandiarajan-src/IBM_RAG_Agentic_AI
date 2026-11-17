@@ -1,0 +1,21 @@
+FROM python:3.12-slim
+
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    GRADIO_SERVER_NAME=0.0.0.0 \
+    GRADIO_SERVER_PORT=7860 \
+    GRADIO_ANALYTICS_ENABLED=False
+
+WORKDIR /app
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY supportbot ./supportbot
+COPY step1_interface.py step2_blocks.py step3_chat.py ./
+
+# Do not run as root inside the container.
+RUN useradd --create-home appuser && mkdir -p /app/data && chown -R appuser /app
+USER appuser
+
+EXPOSE 7860
+CMD ["python", "step3_chat.py"]

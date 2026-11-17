@@ -1,0 +1,17 @@
+[project]
+name = "02-01-gradio-ollama-chatbot"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "Pandiarajan", email = "pandi.rajan@icloud.com" }
+]
+requires-python = ">=3.14"
+dependencies = []
+
+[project.scripts]
+02-01-gradio-ollama-chatbot = "02_01_gradio_ollama_chatbot:main"
+
+[build-system]
+requires = ["uv_build>=0.13.6,<0.14.0"]
+build-backend = "uv_build"

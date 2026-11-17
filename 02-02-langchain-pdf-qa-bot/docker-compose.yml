@@ -1,0 +1,25 @@
+# The app runs in a container; Ollama stays on your host machine.
+#   docker compose up --build     then open http://localhost:7860
+services:
+  qabot:
+    build: .
+    ports:
+      - "7860:7860"
+    environment:
+      # host.docker.internal = "my host machine" as seen from inside the container
+      OLLAMA_HOST: ${OLLAMA_HOST:-http://host.docker.internal:11434}
+      OLLAMA_MODEL: ${OLLAMA_MODEL:-llama3.2}
+      OLLAMA_EMBED_MODEL: ${OLLAMA_EMBED_MODEL:-nomic-embed-text}
+      QABOT_CHUNK_SIZE: ${QABOT_CHUNK_SIZE:-500}
+      QABOT_CHUNK_OVERLAP: ${QABOT_CHUNK_OVERLAP:-75}
+      QABOT_TOP_K: ${QABOT_TOP_K:-4}
+      QABOT_CHROMA_DIR: /app/data/chroma
+      QABOT_DB: /app/data/qabot.db
+    extra_hosts:
+      - "host.docker.internal:host-gateway"   # needed on Linux; harmless on Mac/Windows
+    volumes:
+      - qabot_data:/app/data                  # keeps ChromaDB + SQLite across restarts
+    restart: unless-stopped
+
+volumes:
+  qabot_data:

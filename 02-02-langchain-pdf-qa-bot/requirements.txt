@@ -1,0 +1,8 @@
+# Pinned so every grad gets the same behaviour. Verified 2026-11-14.
+langchain-core==1.8.0
+langchain-text-splitters==1.1.3
+langchain-ollama==1.1.0
+langchain-chroma==1.1.0
+chromadb==1.5.9
+pypdf==7.1.0
+gradio==6.32.0
